@@ -1,0 +1,12 @@
+.row {
+    width: 100%;
+    /* Try setting this to 400px or something */
+    display: table-row;
+    border: 1px solid #444444;
+    margin-left: 25px;
+
+    background-color: #cccccc;
+    min-height: 40px;
+    display: table-cell;
+}
+
