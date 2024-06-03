@@ -56,7 +56,7 @@ return (
 
         <div>
             <Dropdown
-                placeholder='Select Release Year'
+                placeholder='Select year'
                 // fluid
                 selection
                 options= {years}
