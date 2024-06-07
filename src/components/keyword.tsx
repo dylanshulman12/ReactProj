@@ -14,7 +14,7 @@ const handleChange = (event, data) => {
 return (
     <div>
         <Input 
-    placeholder='Search...'
+    placeholder='Enter Keyword...'
     onChange={handleChange}
     >
         <input data-testid='my-input-1' />

@@ -5,55 +5,62 @@ import './App.css'
 
 //input fields and dropdown imports
 import DropDownGenres from './components/genreDropdown';
-import DropDownYears from './components/YearDropdown';
 import KeywordInput from './components/keyword';
+import DropDownYears from './components/YearDropdown copy';
 
 //storing the data
-import { getCallData } from './logic src/logic';
-
-//getting obj, and setting name cause why not
-let callData = getCallData();
-
-//styling
-import './drop.css'
+import { CheckData } from './logic src/logic';
+import {getCall} from "./components/api.tsx";
 
 
-//with_keywords=${callData.keyword}&
 
-// const link = `https://api.themoviedb.org/3/discover/movie?with_genres=${callData.genre}&year=${callData.year}`
 
-// function call({link}) {
+//box to display said data
+function CreateResultBox({t, i, d, re, image}) {
+  return (
+      <div>
+        <img src={image} alt={re}/>
+        <h1>{t}</h1>
+        <p>Description: ${d}</p>
+      </div>
 
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     accept: 'application/json',
-//     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZjQ4ZGJmNTA2N2YzYTUxMjcxMjZjOTIyNjJlY2RlOCIsInN1YiI6IjY2NGY3MzNlZWM4NTY1YmFkOTRmODYxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HpZjyBX34ZuwzOsrNRasoGstoHLiihmv8jEJvgrjqdA'
-//   }
-// };
+  );
+}
 
-// fetch(`${link}`, options)
-//   .then(response => response.json())
-//   .then(response => console.log(response))
-//   .catch(err => console.error(err));
-
-// }
 
 export default function App() {
+  const [data, setData] = useState([]);
 
- 
-
+  const handleClick = () => {
+    getCall(CheckData()).then(stuff => {
+      setData(stuff);
+    });
+  }
+  
 
   return (
-    <div
-    className="row"
-    > 
+    <div>
       <DropDownGenres/>
       <DropDownYears/>
       <KeywordInput/>
-     
-    </div>
+      <button onClick={handleClick} >Discover</button>
 
+
+
+      <div className="box">
+          {data.map(movie => (
+              <CreateResultBox
+                  t={movie.id}
+                  i={movie.title}
+                  d={movie.description}
+                  re={movie.releaseDate}
+                  image={movie.poster}
+              />
+              )
+          )}
+      </div>
+
+    </div>
   );
 }
 
